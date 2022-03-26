@@ -4,15 +4,15 @@ public class Program {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Student student =new Student();
-		
+		Student student = new Student();
+
 		student.setFirstName("Franklin Sanchez Serrano");
-		//sysout+ctrl+ space
-		
+		student.setId(1L);
+		// sysout+ctrl+ space
+
 	
 		System.out.println(student.getFirstName());
-	
-		
+		System.out.println(student.getId());
 
 	}
 
