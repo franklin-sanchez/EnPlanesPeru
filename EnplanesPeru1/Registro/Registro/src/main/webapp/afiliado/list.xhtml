@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/WEB-INF/templates/master.xhtml">
+		<ui:define name="content">
+			<h:form id="frm">
+
+				<p:growl id="men" />
+
+				<p:toolbar>
+					<f:facet name="right">
+						<p:commandButton value="Nuevo" icon="ui-icon-disk"
+							action="#{afiliadoController.nuevoAfiliado()}" ajax="false" />
+						<p:commandButton value="Editar" icon="ui-icon-disk"
+							action="#{afiliadoController.editarAfiliado()}" ajax="false" />
+					</f:facet>
+
+				</p:toolbar>
+
+				<p:fieldset legend="PERFIL DE EMPRESA">
+					<p:dataTable id="datTabafiliado"
+						emptyMessage="No existen empresas registradas"
+						value="#{afiliadoController.afiliados}" var="afiliado"
+						rowKey="#{afiliado.cAfiliado}" selectionMode="single"
+						selection="#{afiliadoController.afiliadoSelected}"
+						paginator="true" rows="10">
+
+
+						<p:ajax event="rowSelect"
+							listeners="#{afiliadoController.seleccionarAfiliado}" />
+
+						<p:column headerText="Nombres">
+							<p:outputLabel value="#{afiliado.nAfiliadoNombre}" />
+						</p:column>
+						<p:column headerText="Apellidos">
+							<p:outputLabel value="#{afiliado.nAfiliadoApellido}" />
+						</p:column>
+						<p:column headerText="Nombre de la empresa">
+							<p:outputLabel value="#{afiliado.nEmpresa}" />
+						</p:column>
+						<p:column headerText="Correo electrónico">
+							<p:outputLabel value="#{afiliado.tCorreo}" />
+						</p:column>
+						<p:column headerText="RUC">
+							<p:outputLabel value="#{afiliado.numRuc}" />
+						</p:column>
+						<p:column headerText="Celular">
+							<p:outputLabel value="#{afiliado.numCelular}" />
+						</p:column>
+						<p:column headerText="Contraseña">
+							<p:outputLabel value="#{afiliado.tPassword}" />
+						</p:column>
+						<p:column headerText="Confirmar contraseña">
+							<p:outputLabel value="#{afiliado.tConfirmPassword}" />
+						</p:column>
+
+					</p:dataTable>
+				</p:fieldset>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>

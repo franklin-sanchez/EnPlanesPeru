@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/WEB-INF/templates/master.xhtml">
+		<ui:define name="content">
+			<h:form id="frm">
+
+				<p:growl id="men" />
+
+				<p:toolbar>
+					<f:facet name="right">
+						<p:commandButton value="Nuevo" icon="ui-icon-disk"
+							action="#{usuarioController.nuevoUsuario()}" ajax="false" />
+						<p:commandButton value="Editar" icon="ui-icon-disk"
+							action="#{usuarioController.editarUsuario()}" ajax="false" />
+					</f:facet>
+
+				</p:toolbar>
+
+				<p:fieldset legend="PERFIL DE USUARIO">
+					<p:dataTable id="datTabusuario"
+						emptyMessage="No existen usuarios registrados"
+						value="#{usuarioController.usuarios}" var="usuario"
+						rowKey="#{usuario.cUsuario}" selectionMode="single"
+						selection="#{usuarioController.usuarioSelected}" paginator="true"
+						rows="10">
+
+
+						<p:ajax event="rowSelect"
+							listeners="#{usuarioController.seleccionarUsuario}" />
+
+						<p:column headerText="Nombres">
+							<p:outputLabel value="#{usuario.nUsuarioNombre}" />
+						</p:column>
+						<p:column headerText="Apellidos">
+							<p:outputLabel value="#{usuario.nUsuarioApellido}" />
+						</p:column>
+						<p:column headerText="Correo electrónico">
+							<p:outputLabel value="#{usuario.tCorreo}" />
+						</p:column>
+						<p:column headerText="Celular">
+							<p:outputLabel value="#{usuario.numCelular}" />
+						</p:column>
+						<p:column headerText="Contraseña">
+							<p:outputLabel value="#{usuario.tPassword}" />
+						</p:column>
+						<p:column headerText="Confirmar contraseña">
+							<p:outputLabel value="#{usuario.tConfirmPassword}" />
+						</p:column>
+
+					</p:dataTable>
+				</p:fieldset>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>
